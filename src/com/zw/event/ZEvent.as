@@ -19,24 +19,52 @@ package com.zw.event
 	 */
 	public class ZEvent extends Event
 	{
-		
 		public static const SingletonError:String = "singletonError";
 		public static const ABSError:String = "absError";
 		
 		public static const Init:String = "init";
+		public static const Add:String = "add";
+		public static const Close:String = "close";
 		
 		public static const Selected:String = "selected";
+		public static const Ok:String = "ok";
 		public static const Cancel:String = "cancel";
+		public static const Success:String = "success";
 		public static const Failed:String = "failed";
 		public static const Complete:String = "complete";
 		public static const Change:String = "change";
 		
-		public var data:Object;
+		public static const Resize:String = "resize";
+		public static const ResizeAtOnce:String = "resizeAtOnce";
 		
-		public function ZEvent($type:String, $data:Object=null , $bubbles:Boolean=false)
-		{
+		public static const Jump:String = "jump";
+		public static const Buy:String = "buy";
+		public static const Info:String = "info";
+		public static const Statistics:String = "statistics";
+		
+		public static const Shop:String = "shop";
+		public static const Cart:String = "cart";
+		
+		public static const Show:String = "show";
+		public static const Hide:String = "hide";
+		public static const Enrer:String = "enrer";
+		public static const Exit:String = "exit";
+		public static const Out:String = "out";
+		public static const In:String = "in";
+		
+		public static const Start:String = "start";
+		public static const Stop:String = "stop";
+		public static const Pause:String = "pause";
+		public static const Resart:String = "resart";
+		public static const Resume:String = "resume";
+		
+		public var data:Object;
+		public var action:String;
+		
+		public function ZEvent($type:String, $data:Object=null , $bubbles:Boolean=false , $action:String=""){
 			super($type, $bubbles);
 			data = $data;
+			action = $action;
 		}
 		
 	}
