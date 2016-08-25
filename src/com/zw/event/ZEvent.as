@@ -33,6 +33,7 @@ package com.zw.event
 		public static const Failed:String = "failed";
 		public static const Complete:String = "complete";
 		public static const Change:String = "change";
+		public static const Update:String = "update";
 		
 		public static const Resize:String = "resize";
 		public static const ResizeAtOnce:String = "resizeAtOnce";
