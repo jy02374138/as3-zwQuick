@@ -1,25 +1,24 @@
 ///////////////////////////////////////////////////////////
-//  ZEvent.as
-//  Macromedia ActionScript Implementation of the Class ZEvent
-//  Created on:      2015-7-2 下午8:00:06
+//  EventBase.as
+//  Macromedia ActionScript Implementation of the Class EventBase
+//  Created on:      2016-3-29 下午10:13:45
 //  Original author: Zhangwei
 ///////////////////////////////////////////////////////////
 
-package com.zw.event
+package com.zw.frames.ec
 {
 	import flash.events.Event;
 	
 	
 	/**
-	 * 通用事件
+	 * 基础事件
 	 * @author Zhangwei
 	 * @version 1.0
 	 * 
-	 * @created  2015-7-2 下午8:00:06
+	 * @created  2016-3-29 下午10:13:45
 	 */
-	public class ZEvent extends Event
+	public class EventBase extends Event
 	{
-		
 		public static const SingletonError:String = "singletonError";
 		public static const ABSError:String = "absError";
 		
@@ -33,11 +32,10 @@ package com.zw.event
 		
 		public var data:Object;
 		
-		public function ZEvent($type:String, $data:Object=null , $bubbles:Boolean=false)
-		{
+		
+		public function EventBase($type:String, $data:Object=null , $bubbles:Boolean=false){
 			super($type, $bubbles);
 			data = $data;
 		}
-		
 	}
 }
