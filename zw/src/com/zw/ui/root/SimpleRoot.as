@@ -16,7 +16,7 @@ package com.zw.ui.root
 	
 	
 	/**
-	 * 
+	 * 轻量级便捷型程序根容器
 	 * @author Zhangwei
 	 * @version 1.0
 	 * 
@@ -49,6 +49,7 @@ package com.zw.ui.root
 				return
 			}
 			Utils.remoeEvent($e , onFrame);
+			Utils_UI.setYaheiFont();
 			creatChildren();
 			initEvent();
 			creatComplete();

@@ -23,7 +23,29 @@ package com.zw.utils
 
 	public class Utils_UI{
 		
-	/******************************************************Text类************************************************************/
+		public static var MICROSOFT_YAHEI:String = "Arial";
+		
+/******************************************************Text类************************************************************/
+		/**初始化雅黑字体*/
+		public static function setYaheiFont() : void{
+			var t1:TextField = new TextField();
+			t1.defaultTextFormat = new TextFormat("Microsoft YaHei", 12 , 0xffffff);
+			t1.text = "雅黑";
+			var t2:TextField = new TextField();
+			t2.defaultTextFormat = new TextFormat("微软雅黑", 12, 0xffffff);
+			t2.text = "雅黑";
+			var t3:TextField = new TextField();
+			t3.defaultTextFormat = new TextFormat(null, 12, 0xffffff);
+			t3.text = "雅黑";
+			if (t1.textHeight == t3.textHeight){
+				MICROSOFT_YAHEI = "微软雅黑";
+			}
+			if (t1.textHeight >= t2.textHeight){
+				MICROSOFT_YAHEI = "Microsoft YaHei";
+			}
+		}
+		
+		
 		//单行文本
 		public static function creatTextField(c:DisplayObjectContainer , 
 											  label:String="" ,
@@ -34,6 +56,9 @@ package com.zw.utils
 			var t:TextField = new TextField();
 			if(width>0){
 				t.width = width
+			}
+			if(!font){
+				font = MICROSOFT_YAHEI;
 			}
 			
 			var fomate:TextFormat = new TextFormat(null , size , color)
@@ -60,7 +85,7 @@ package com.zw.utils
 		public static function creatTextArea(c:DisplayObjectContainer , label:String="" ,
 											 x:Number = 0 , y:Number = 0, width:Number=0 , height:Number=0 ,
 											 size:int = 12 ,
-											 color:uint=0x000000, font:String="微软雅黑" , bold:Boolean=false,
+											 color:uint=0x000000, font:String="" , bold:Boolean=false,
 											 auto:String=TextFieldAutoSize.NONE , align:String=TextFormatAlign.LEFT):TextField{
 			var t:TextField = new TextField();
 			if(width>0){
@@ -68,6 +93,9 @@ package com.zw.utils
 			}
 			if(height>0){
 				t.height = height
+			}
+			if(!font){
+				font = MICROSOFT_YAHEI
 			}
 			
 			var fomate:TextFormat = new TextFormat(null , size , color)
@@ -101,7 +129,7 @@ package com.zw.utils
 		}
 		
 		public static function setTextFormat(t:TextField , size:int , color:int , bold:Boolean):TextFormat{
-			var tf:TextFormat = new TextFormat("Arial" , size , bold)
+			var tf:TextFormat = new TextFormat(MICROSOFT_YAHEI , size , bold)
 			t.defaultTextFormat = tf;
 			t.text = t.text;
 			return tf
@@ -132,6 +160,8 @@ package com.zw.utils
 		public static function initStage($s:Stage):void{
 			$s.align = StageAlign.TOP_LEFT;
 			$s.scaleMode = StageScaleMode.NO_SCALE;
+			$s.tabChildren = false;
+			$s.showDefaultContextMenu = false;
 		}
 		
 		
