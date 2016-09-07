@@ -9,6 +9,7 @@
     <classEntry path="com.zw.frames.progress.Module"/>
     <classEntry path="com.zw.frames.progress.Processor"/>
     <classEntry path="com.zw.ui.root.MinerRoot"/>
+    <classEntry path="com.zw.media.SimpleVideo"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

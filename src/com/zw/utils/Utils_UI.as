@@ -323,7 +323,7 @@ package com.zw.utils
 				$r = new Rectangle(0 , 0 , $c.width , $c.height);
 			}
 			var bmd:BitmapData = new BitmapData($r.width , $r.height);
-			var m:Matrix = null;
+			var m:Matrix = new Matrix();
 			if($r.x>0 || $r.y>0){
 				m.tx = -$r.x;
 				m.ty = -$r.y;
