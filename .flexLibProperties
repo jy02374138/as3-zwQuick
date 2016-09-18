@@ -8,8 +8,12 @@
     <classEntry path="com.zw.frames.progress.event.ModuleEventManager"/>
     <classEntry path="com.zw.frames.progress.Module"/>
     <classEntry path="com.zw.frames.progress.Processor"/>
-    <classEntry path="com.zw.ui.root.MinerRoot"/>
+    <classEntry path="com.zw.ui.root.minner.MinerRoot"/>
     <classEntry path="com.zw.media.SimpleVideo"/>
+    <classEntry path="com.zw.ui.root.Stage3DRoot"/>
+    <classEntry path="com.zw.ui.root.minner.MinnerStage3DRoot"/>
+    <classEntry path="com.zw.ui.root.stats.StatsRoot"/>
+    <classEntry path="com.zw.ui.root.stats.StatsStage3DRoot"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

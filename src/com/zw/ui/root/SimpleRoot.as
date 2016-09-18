@@ -37,7 +37,7 @@ package com.zw.ui.root
 			Utils.remoeEvent($e , onAdd);
 			Utils_UI.initStage(stage);
 			if(!stage.stageWidth || !stage.stageHeight){
-				onFrame()
+				onFrame();
 				return
 			}else{
 				this.addEventListener(Event.ENTER_FRAME , onFrame);

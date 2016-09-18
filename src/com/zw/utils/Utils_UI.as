@@ -332,6 +332,24 @@ package com.zw.utils
 			return bmd
 		}
 		
+		/**
+		 * 缩放图片，比直接截图要平滑一些
+		 * @param $b
+		 * @param $r
+		 * @return 
+		 */
+		private static function zoomBmd($b:BitmapData , $r:Rectangle):BitmapData{
+			var b:BitmapData = null
+			if(!$b || !$r){
+				return b;
+			}
+			b = new BitmapData($r.width , $r.height , $b.transparent , 0x0);
+			var m:Matrix = new Matrix();
+			m.a = $r.width / $b.width;
+			m.d = $r.height / $b.height;
+			b.draw($b , m , null , null , null , true); 
+			return b;
+		}
 		
 		/**
 		 * 将彩色图转换为黑白图

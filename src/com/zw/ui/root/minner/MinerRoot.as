@@ -5,7 +5,7 @@
 //  Original author: Zhangwei
 ///////////////////////////////////////////////////////////
 
-package com.zw.ui.root
+package com.zw.ui.root.minner
 {
 	import com.sociodox.theminer.TheMiner;
 	import com.sociodox.theminer.TheMinerActionEnum;
@@ -15,6 +15,7 @@ package com.zw.ui.root
 	import flash.ui.KeyLocation;
 	import flash.ui.Keyboard;
 	import flash.ui.KeyboardType;
+	import com.zw.ui.root.MyRoot;
 	
 	/**
 	 * 性能测试舞台Root
