@@ -11,6 +11,7 @@ package com.zw.media
 	
 	import flash.events.NetStatusEvent;
 	import flash.events.SecurityErrorEvent;
+	import flash.media.SoundTransform;
 	import flash.media.Video;
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
@@ -54,6 +55,7 @@ package com.zw.media
 //logic
 		//链接过程
 		private function netStatusHandler(event:NetStatusEvent):void {
+			var type:String = ""
 			switch (event.info.code) {
 				case "NetConnection.Connect.Success":
 					connectStream();
@@ -61,6 +63,14 @@ package com.zw.media
 				case "NetStream.Play.StreamNotFound":
 					trace("Stream not found: " + url);
 					break;
+				case "NetStream.Play.Start":
+					type = ZEvent.Play;
+					break
+			}
+			
+			if(type){
+				var evt:ZEvent = new ZEvent(type);
+				this.dispatchEvent(evt);
 			}
 		}
 		
@@ -79,7 +89,6 @@ package com.zw.media
 				url = _url;
 			}
 		}
-
 		
 //getter and setter
 		public function get url():String{
@@ -90,6 +99,14 @@ package com.zw.media
 			_url = $value;
 			if(_inited){
 				_stream.play(_url);
+			}
+		}
+		
+		public function set volume($val:Number):void{
+			if(_stream){
+				var t:SoundTransform = _stream.soundTransform;
+				t.volume = $val;
+				_stream.soundTransform = t;
 			}
 		}
 	}

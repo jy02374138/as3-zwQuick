@@ -58,6 +58,7 @@ package com.zw.event
 		public static const Pause:String = "pause";
 		public static const Resart:String = "resart";
 		public static const Resume:String = "resume";
+		public static const Play:String = "play";
 		
 		public var data:Object;
 		public var action:String;
