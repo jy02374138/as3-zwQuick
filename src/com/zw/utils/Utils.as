@@ -7,6 +7,7 @@ package com.zw.utils
 	import flash.net.LocalConnection;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
+	import flash.system.Capabilities;
 	import flash.system.System;
 	import flash.utils.ByteArray;
 	import flash.utils.getDefinitionByName;
@@ -349,5 +350,59 @@ package com.zw.utils
 			d.removeEventListener($e.type , $fun);
 		}
 		
+		
+		/**
+		 * 检查StageVideo是否可用
+		 * @return 
+		 */
+		public static function checkVersionForStageVideo() : Boolean{
+			var a:Array = Capabilities.version.split(" ");
+			var s:String = a[0];
+			if (s == null || s != "WIN" && s != "MAC" && s != "LNX"){
+				return false;
+			}
+			var v:String = a[1];
+			if (compareVersion("10,3,181,14", v) < 0){
+				return false;
+			}
+			return true;
+		}
+		
+		/**
+		 * 比较两个版本的先后
+		 * @param $v0
+		 * @param $v1
+		 * @return
+		 * 			-1		 v0是新版本
+		 * 			1		 v1是新版本
+		 * 			0		两者相同
+		 */
+		public static function compareVersion($v0:String, $v1:String):int{
+			var a0:Array = $v0.split(",");
+			var a1:Array = $v0.split(",");
+			var n:int = Math.min(a0.length, a1.length);
+			var result:int = 0;
+			for (var i:int = 0; i < n; i++){
+				var n0:int = parseInt(a0[i]);
+				var n1:int = parseInt(a1[i]);
+				if (n0 > n1){
+					result = -1;
+					break;
+				}
+				else if (n0 < n1){
+					result = 1;
+					break;
+				}
+			}
+			if(result==0){
+				if (a0.length > a1.length){
+					result = -1;
+				}
+				else if (a0.length < a1.length){
+					result= 1;
+				}
+			}
+			return result;
+		}
 	}
 }
