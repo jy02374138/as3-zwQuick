@@ -8,12 +8,14 @@
 package com.zw.ui.root
 {
 	import com.adobe.utils.AGALMiniAssembler;
+	import com.zw.utils.Utils;
+	import com.zw.utils.Utils_UI;
 	
 	import flash.display.Stage3D;
 	import flash.display3D.Context3D;
 	import flash.display3D.Context3DRenderMode;
-	import flash.events.Event;
 	import flash.display3D.Program3D;
+	import flash.events.Event;
 	
 	/**
 	 * 简易Stage3DRoot
@@ -27,7 +29,9 @@ package com.zw.ui.root
 		public var stage3D:Stage3D;
 		public var context3D:Context3D;
 		public var program3D:Program3D;
-		public var agal:AGALMiniAssembler;
+		
+		protected var _agal_vertex:AGALMiniAssembler;
+		protected var _agal_fragment:AGALMiniAssembler;
 		
 		/**是否为debug版本*/
 		protected var _isDebug:Boolean;
@@ -38,32 +42,37 @@ package com.zw.ui.root
 			super();
 		}
 		
-		override protected function creatChildren():void{
-			stage3D = stage.stage3Ds[0];
-			context3D = stage3D.context3D;
-			program3D = context3D.createProgram();
-			agal = new AGALMiniAssembler();
-			
-			context3D.enableErrorChecking = _isDebug;
-		}
-		
-		override protected function initEvent():void{
-			super.initEvent();
-			stage3D.addEventListener(Event.CONTEXT3D_CREATE, onStageReady);
-		}
-		
+//init
 		override protected function creatComplete():void{
 			super.creatComplete();
-			stage3D.requestContext3D(Context3DRenderMode.AUTO);
+			_agal_vertex = new AGALMiniAssembler();
+			_agal_fragment = new AGALMiniAssembler();
+			stage3D = stage.stage3Ds[0];
+			stage3D.addEventListener(Event.CONTEXT3D_CREATE, onStageReady);
+			stage3D.requestContext3D();
 		}
 		
 		private function onStageReady($e:Event):void{
 			stage3D.removeEventListener(Event.CONTEXT3D_CREATE, onStageReady);
+			context3D = stage3D.context3D;
+			program3D = context3D.createProgram();
+			context3D.enableErrorChecking = _isDebug;
 			stage3DInited();
 		}
 		
 		protected function stage3DInited():void{
 			
 		}
+		
+		public function start():void{
+			this.addEventListener(Event.ENTER_FRAME , onFrame);
+		}
+		
+		public function stop():void{
+			this.removeEventListener(Event.ENTER_FRAME , onFrame);
+		}
+		
+//event handler
+		protected function onFrame($e:Event):void{}
 	}
 }

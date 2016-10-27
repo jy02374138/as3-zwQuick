@@ -11,6 +11,7 @@ package com.zw.utils
 	import flash.display.Stage;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.display3D.textures.Texture;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
@@ -422,5 +423,30 @@ package com.zw.utils
 				return s;
 			}
 		}
+		
+		
+		/*******************************************Stage3D***************************************************/
+		public static function mip($t:Texture , $b:BitmapData):void{
+			var w:int = $b.width;
+			var h:int = $b.height;
+			var l:int = 0;
+			var b:BitmapData = new BitmapData(w , h , false , 0x0);
+			var m:Matrix = new Matrix();
+			while(w>=1 && h>=1){
+				b.draw($b , m , null , null , null , true);
+				$t.uploadFromBitmapData(b , l);
+				
+				m.scale(0.5 , 0.5);
+				w>>=1;
+				h>>=1;
+				l++;
+				if(w && h){
+					b.dispose();
+					b = new BitmapData(w , h , false , 0x0);
+				}
+			}
+			b.dispose();
+		}
+		
 	}
 }

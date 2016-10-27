@@ -34,7 +34,7 @@ package com.zw.ui.root
 		}
 		
 		protected function onAdd($e:Event=null):void{
-			Utils.remoeEvent($e , onAdd);
+			Utils.removeEvent($e , onAdd);
 			Utils_UI.initStage(stage);
 			if(!stage.stageWidth || !stage.stageHeight){
 				onFrame();
@@ -48,7 +48,7 @@ package com.zw.ui.root
 			if(!stage.stageWidth || !stage.stageHeight){
 				return
 			}
-			Utils.remoeEvent($e , onFrame);
+			Utils.removeEvent($e , onFrame);
 			Utils_UI.setYaheiFont();
 			creatChildren();
 			initEvent();

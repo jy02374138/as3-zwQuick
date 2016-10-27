@@ -3,8 +3,11 @@ package com.zw.utils
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.external.ExternalInterface;
 	import flash.net.LocalConnection;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	import flash.system.Capabilities;
@@ -324,6 +327,24 @@ package com.zw.utils
 			} catch ( e : * ) {}
 		}
 		
+		/**
+		 * 尝试调用函数
+		 * @param $f			要尝试的函数	
+		 * @param args		参数
+		 * @return  				true-调用成功，false-调用失败
+		 */
+		public static function try2Call($f:Function , args:Array=null):Boolean{
+			if($f==null){
+				return false
+			}
+			try{
+				$f.apply(null , args);
+			}catch($e:Error){
+				return false
+			}
+			return true;
+		}
+		
 		public static function class2Object($className:String):Object{
 			if(!$className){
 				return null
@@ -342,7 +363,7 @@ package com.zw.utils
 		 * @param $e			事件Event实例
 		 * @param $fun		事件侦听函数
 		 */
-		public static function remoeEvent($e:Event , $fun:Function):void{
+		public static function removeEvent($e:Event , $fun:Function):void{
 			if(!$e || $fun==null){
 				return
 			}
@@ -403,6 +424,29 @@ package com.zw.utils
 				}
 			}
 			return result;
+		}
+		
+		public static function creatUrlLoader($url:String , $complete:Function , $fail:Function=null):URLLoader{
+			var r:URLRequest = new URLRequest($url);
+			var l:URLLoader = new URLLoader()
+			l.addEventListener(Event.COMPLETE , $complete);
+			if($fail!=null){
+				l.addEventListener(IOErrorEvent.IO_ERROR , $fail);
+				l.addEventListener(SecurityErrorEvent.SECURITY_ERROR , $fail);
+			}
+			l.load(r);
+			return l;
+		}
+		
+		public static function deletUrlLoader($l:URLLoader , $complete:Function , $fail:Function=null):Object{
+			var data:Object = $l.data;
+			$l.removeEventListener(Event.COMPLETE , $complete);
+			if($fail!=null){
+				$l.removeEventListener(IOErrorEvent.IO_ERROR , $fail);
+				$l.removeEventListener(SecurityErrorEvent.SECURITY_ERROR , $fail);
+			}
+			$l.data = null;
+			return data;
 		}
 	}
 }
