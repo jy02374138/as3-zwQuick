@@ -74,5 +74,12 @@ package com.zw.ui.root
 		
 //event handler
 		protected function onFrame($e:Event):void{}
+		
+		override protected function onResize($e:Event):void{
+			super.onResize($e);
+			if(context3D){
+				context3D.configureBackBuffer(stage.stageWidth , stage.stageHeight , 0 , true);
+			}
+		}
 	}
 }
