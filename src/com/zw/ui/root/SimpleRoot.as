@@ -13,6 +13,8 @@ package com.zw.ui.root
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
+	import flash.ui.ContextMenu;
+	import flash.ui.ContextMenuItem;
 	
 	
 	/**
@@ -24,6 +26,8 @@ package com.zw.ui.root
 	 */
 	public class SimpleRoot extends Sprite
 	{
+		protected var version:String;
+		
 		public function SimpleRoot(){
 			super();
 			if(stage){
@@ -36,12 +40,23 @@ package com.zw.ui.root
 		protected function onAdd($e:Event=null):void{
 			Utils.removeEvent($e , onAdd);
 			Utils_UI.initStage(stage);
+			initMenu();
 			if(!stage.stageWidth || !stage.stageHeight){
 				onFrame();
 				return
 			}else{
 				this.addEventListener(Event.ENTER_FRAME , onFrame);
 			}
+		}
+		
+		protected function initMenu():void{
+			if(!version){
+				return
+			}
+			var item:ContextMenuItem = new ContextMenuItem(version , false , false);
+			var m:ContextMenu = new ContextMenu();
+			m.customItems.push(item);
+			this.contextMenu = m;
 		}
 		
 		private function onFrame($e:Event=null):void{
